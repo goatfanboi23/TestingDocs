@@ -1,4 +1,3 @@
-THIS IS A TEST
 
 ```java
 public static void main(String[] args){
