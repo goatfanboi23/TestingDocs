@@ -2,4 +2,4 @@ site_name: Testing Site
 theme:
   name: material
   palette:
-    - scheme: slate
+    scheme: slate
