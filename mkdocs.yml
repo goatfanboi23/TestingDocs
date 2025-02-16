@@ -2,4 +2,5 @@ site_name: Testing Site
 theme:
   name: material
   palette:
-    scheme: slate
+    primary: indigo
+    scheme: slate  # Ensures dark mode is applied
