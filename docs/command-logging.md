@@ -86,3 +86,18 @@ We need someway to turn the hierarchy of commands into a path. Moreover, we need
     return prefix + getBasicName() + "/inst";
   }
 ```
+
+First we get the Parent's path (using `toString()`) and the remove the "/inst" suffix. The results in a path that contains the parent log path minus that actual instance addition of the parent. From this we then append the name of this command along with "/inst" (which is why we had to remove it earlier because the parent did the same thing).
+Because this block of code is in all the commands we use, we get a massive tree of path names that can be logged.
+
+This is great and all but who actually logs the commands?
+
+### Welcome to the `CommandLoggger`
+
+The `CommandLogger` works by subscribing to some of the events of WPILib's `CommandSchedualer`:
+
+1. `onCommandInitalize(Consumer<Command> action)`
+2. `onCommandFinish(Consumer<Command> action)`
+3. `onCommandInterupt(Consumer<Command> action`
+
+On each of these events, we store the recorded state in a queue which then gets logged every tick.
