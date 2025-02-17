@@ -50,7 +50,8 @@ nav:
   - Section:
       - index.md
       - Command Logging: command-logging.md
+      - Subsystem Logging: subsystem-logging.md
 extra_css:
   - stylesheets/extra.css
 extra:
-  mermaid_theme: 'forest'
+  mermaid_theme: "forest"
