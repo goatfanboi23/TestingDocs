@@ -98,6 +98,6 @@ The `CommandLogger` works by subscribing to some of the events of WPILib's `Comm
 
 1. `onCommandInitalize(Consumer<Command> action)`
 2. `onCommandFinish(Consumer<Command> action)`
-3. `onCommandInterupt(Consumer<Command> action`
+3. `onCommandInterupt(Consumer<Command> action)`
 
 On each of these events, we store the recorded state in a queue which then gets logged every tick.
