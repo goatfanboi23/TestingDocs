@@ -18,6 +18,9 @@
 !!! warning
     Right now, command compositions do not work. Each command must be declared in a file. In other words, you can not call `.andThen` or `.withTimeout`.
 
+!!! important
+    Commands can not be reused. They can be scheduled multiple times, but they can not have multiple parents.
+
 ## How Command Logging works
 
 !!! note
