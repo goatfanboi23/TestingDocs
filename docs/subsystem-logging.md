@@ -82,3 +82,53 @@ Assuming the IO is passed in via `RobotContainer`, a new `LoggableSystem` can be
 ```java
 fooSystem = new LoggableSystem<>(io, inputs);
 ```
+
+Finally, in the Subsystem's `periodic()`, you have to call `system.updateInputs()`
+
+## How Subsystem Logging Works
+
+Most of it is AdvantageKit, but what we created was a input generate pipeline.
+
+This pipeline consists of
+
+- `InputProviders`
+- `Inputs`
+- `InputBuilders`
+
+### InputProviders
+
+``` mermaid
+classDiagram
+InputProvider <|-- MotorInputProvider
+InputProvider <|-- PidMotorInputProvider
+MotorInputProvider <|-- SparkMaxInputProvider
+MotorInputProvider <|-- TalonInputProvider
+SparkMaxInputProvider <|-- NeoPidMotorInputProvider
+PidMotorInputProvider <|-- NeoPidMotorInputProvider
+class InputProvider{
+  <<interface>>
+}
+class MotorInputProvider {
+  <<interface>>
+  +getMotorCurrent()
+  +getMotorTemperature()
+  +getEncoderPosition()
+  +getEncoderVelocity()
+  +getFwdLimit()
+  +getRevLimit()
+}
+class PidMotorInputProvider{
+  <<interface>>
+  +getPidSetpoint()
+}
+class SparkMaxInputProvider{
+  -sparkMax: SparkMax
+}
+class TalonInputProvider{
+  -talon: WPI_TalonSRX
+}
+class NeoPidMotorInputProvider{
+  - neoPidMotor: NeoPidMotor
+}
+```
+Starting off simple, all the InputProvider classes do is provide a common interface for retrieving motor information. This bridges the gab between different vendors as there is no common superclass.
